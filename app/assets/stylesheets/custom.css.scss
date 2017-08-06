@@ -25,12 +25,11 @@ $navbar-default-bg: #17395b;
   background-image: asset-url('hockey-rink.jpg');
   background-size: cover;
   height: 400px;
-}
-
-.jumbotron h1, h2 {
+  
+  h1, h2 {
   color: #fff;
   text-align: center;
-  
+  }
 }
 
 .navbar {
@@ -43,8 +42,23 @@ $navbar-default-bg: #17395b;
   border-color: #17395b;;
 }
 
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
 .footer {
-  height: 100px;
-  background-color: #17395b;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
   color: #fff;
+ 
 }
