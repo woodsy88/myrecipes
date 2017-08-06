@@ -1,0 +1,23 @@
+
+<div class="container">
+<h2 align="center">Thanks Tips!</h2>
+<hr />
+<% @tips.each do |tip|  %>
+
+<div class="row">
+  <div class="col-md-2">
+    <section class="center">
+      
+    </section>
+  </div>
+  <div class="col-md-8 well">
+     <h4 class="tip-name"><%= tip.name %></h4>
+  <p class="tip-description"><%= truncate( tip.description, length: 150) %></p>
+  <p>
+  <span class="quiet"><small class="tip-date text-muted">Added <%= time_ago_in_words(tip.created_at)  %> ago</small></span>
+   </p>
+  </div>
+</div>
+
+ 
+<% end %></div>

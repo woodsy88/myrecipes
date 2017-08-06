@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   #the pages/home url will go to the pages controller, home action
   get 'pages/home', to: 'pages#home'
   get 'pages/about', to: 'pages#about'
+  
+  get '/tips', to: 'tips#index'
+  
 end
