@@ -3,7 +3,13 @@ require 'test_helper'
 class TipTest < ActiveSupport::TestCase
  
   def setup
-    @tip = Tip.new(name: "andrew", description: "forward skating")
+    @member = Member.create!(membername: "andy", email: "andy@gmail.com")
+    @tip = @member.tips.build(name: "andrew", description: "forward skating")
+  end
+  
+  test "tip without member should be invalid" do
+    @tip.member_id = nil
+    assert_not @tip.valid?
   end
   
   test "tip should be valid" do
