@@ -19,8 +19,19 @@ class TipsTest < ActionDispatch::IntegrationTest
   test "should get tips listing" do
     get tips_path
     assert_template 'tips/index'
+    assert_select "a[href=?]", tip_path(@tip), text: @tip.name
+    assert_select "a[href=?]", tip_path(@tip2), text: @tip2.name
+  end
+  
+  test "should get tips show" do
+    
+      
+    get tip_path(@tip)
+    assert_template 'tips/show'
     assert_match @tip.name, response.body
-    assert_match @tip2.name, response.body
+    assert_match @tip.description, response.body
+    assert_match @member.membername, response.body
+      
   end
   
   # test "the truth" do
