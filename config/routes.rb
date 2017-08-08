@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   get 'pages/home', to: 'pages#home'
   get 'pages/about', to: 'pages#about'
   
-  get '/tips', to: 'tips#index'
-  get '/tips/:id', to: 'tips#show', as: 'tip'
+  resources :tips
+  #get '/tips', to: 'tips#index'
+  #get '/tips/new', to: 'tips#new', as:'new_tip'
+  #get '/tips/:id', to: 'tips#show', as: 'tip'
+  #post '/tips', to: 'tips#create'
   
 end

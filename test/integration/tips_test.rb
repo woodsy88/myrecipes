@@ -34,7 +34,29 @@ class TipsTest < ActionDispatch::IntegrationTest
       
   end
   
-  # test "the truth" do
-  #   assert true
-  # end
+  test "create new valid tip" do
+    get new_tip_path
+    assert_template 'tips/new'
+    name_of_tip = "skating"
+    description_of_tip = "skate hard, skate fast"
+    assert_difference 'Tip.count', 1 do 
+      post tips_path, params: { tip:{name: name_of_tip, description: description_of_tip}}
+    end
+    
+    follow_redirect!
+    assert_match name_of_tip, response.body
+    assert_match description_of_tip, response.body
+    
+  end
+  
+  test "reject invalid tip submissions" do
+   get new_tip_path
+   assert_template 'tips/new'
+   assert_no_difference 'Tip.count' do
+     post tips_path, params: { tip: {name: " ", description: " "}}
+   end
+    assert_template 'tips/new'
+    assert_select 'h2.panel-title'
+    assert_select 'div.panel-body'
+  end
 end
