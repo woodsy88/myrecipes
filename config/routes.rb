@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   get 'pages/about', to: 'pages#about'
   
   resources :tips
-  #get '/tips', to: 'tips#index'
-  #get '/tips/new', to: 'tips#new', as:'new_tip'
-  #get '/tips/:id', to: 'tips#show', as: 'tip'
-  #post '/tips', to: 'tips#create'
+    #get '/tips', to: 'tips#index'
+    #get '/tips/new', to: 'tips#new', as:'new_tip'
+    #get '/tips/:id', to: 'tips#show', as: 'tip'
+    #post '/tips', to: 'tips#create'
   
 end

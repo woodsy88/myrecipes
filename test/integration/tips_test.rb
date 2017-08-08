@@ -24,13 +24,13 @@ class TipsTest < ActionDispatch::IntegrationTest
   end
   
   test "should get tips show" do
-    
-      
     get tip_path(@tip)
     assert_template 'tips/show'
     assert_match @tip.name, response.body
     assert_match @tip.description, response.body
     assert_match @member.membername, response.body
+    assert_select 'a[href=?]', edit_tip_path(@tip), text: "Edit this tip"
+    assert_select 'a[href=?]', tip_path(@tip), text: "Delete this tip"
       
   end
   

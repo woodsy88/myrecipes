@@ -25,6 +25,25 @@ class TipsController < ApplicationController
     
   end
   
+  def edit
+    @tip = Tip.find(params[:id])
+  end
+  
+  def update
+    @tip = Tip.find(params[:id])
+    if @tip.update(tip_params)
+      flash[:success] = "Recipe was updated succesfully"
+      redirect_to tip_path(@tip)
+    else
+      render 'edit'
+    end
+  end
+  
+  def destroy
+    Tip.find(params[:id]).destroy
+    flash[:success] = "Tip deleted"
+    redirect_to tips_path
+  end
   
   private 
   

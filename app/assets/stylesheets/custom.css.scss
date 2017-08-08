@@ -82,6 +82,12 @@ body {
   color: #17395b;
 }
 
-.page-title {
-  font-size: 30px;
+.page-title {}
+
+.recipe-actions {
+  padding-top: 5px;
+  
+  a {
+    color: #fff;
+  }
 }
