@@ -31,6 +31,7 @@ class TipsTest < ActionDispatch::IntegrationTest
     assert_match @member.membername, response.body
     assert_select 'a[href=?]', edit_tip_path(@tip), text: "Edit this tip"
     assert_select 'a[href=?]', tip_path(@tip), text: "Delete this tip"
+    assert_select 'a[href=?]', tips_path, text: "Return to tips listing"
       
   end
   
