@@ -1,11 +1,12 @@
 class TipsController < ApplicationController
+  before_action :set_tip, only: [:show, :edit, :update]
   
   def index
     @tips = Tip.all
   end
   
   def show
-   @tip = Tip.find(params[:id])
+   #@tip = Tip.find(params[:id])
   end
   
   def new 
@@ -26,11 +27,11 @@ class TipsController < ApplicationController
   end
   
   def edit
-    @tip = Tip.find(params[:id])
+    #@tip = Tip.find(params[:id])
   end
   
   def update
-    @tip = Tip.find(params[:id])
+    #@tip = Tip.find(params[:id])
     if @tip.update(tip_params)
       flash[:success] = "Recipe was updated succesfully"
       redirect_to tip_path(@tip)
@@ -46,6 +47,10 @@ class TipsController < ApplicationController
   end
   
   private 
+  
+  def set_tip
+    @tip = Tip.find(params[:id])
+  end
   
   def tip_params
     params.require(:tip).permit(:name, :description)
