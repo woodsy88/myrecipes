@@ -4,7 +4,8 @@ class TipsTest < ActionDispatch::IntegrationTest
   
   
   def setup
-    @member = Member.create!(membername: "mashur", email: "andrew@farts.com")
+    @member = Member.create!(membername: "mashur", email: "andrew@farts.com", 
+                            password: "password", password_confirmation: "password")
     @tip = Tip.create(name: "fast forward", description: "skate hard", member: @member)
     @tip2 = @member.tips.build(name: "defense", description: "no goals")
     @tip2.save

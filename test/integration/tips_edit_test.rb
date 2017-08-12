@@ -3,7 +3,8 @@ require 'test_helper'
 class TipsEditTest < ActionDispatch::IntegrationTest
 
   def setup
-    @member = Member.create!(membername: "mashur", email: "andrew@farts.com")
+    @member = Member.create!(membername: "mashur", email: "andrew@farts.com",
+                              password: "password", password_confirmation: "password")
     @tip = Tip.create(name: "fast forward", description: "skate hard", member: @member)
   end
 

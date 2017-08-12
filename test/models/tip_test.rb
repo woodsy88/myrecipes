@@ -3,7 +3,8 @@ require 'test_helper'
 class TipTest < ActiveSupport::TestCase
  
   def setup
-    @member = Member.create!(membername: "andy", email: "andy@gmail.com")
+    @member = Member.create!(membername: "andy", email: "andy@gmail.com", 
+                              password: "password", password_confirmation: "password")
     @tip = @member.tips.build(name: "andrew", description: "forward skating")
   end
   

@@ -3,7 +3,8 @@ require 'test_helper'
 class MemberTest < ActiveSupport::TestCase
   
   def setup
-    @member = Member.new(membername: "andrew", email: "andrew@gmail.com")
+    @member = Member.new(membername: "andrew", email: "andrew@gmail.com", 
+                        password: "password", password_confirmation: "password")
   end
   
   test "should be valid" do
@@ -64,5 +65,16 @@ class MemberTest < ActiveSupport::TestCase
     @member.save
     assert_equal mixed_email.downcase, @member.reload.email 
   end
+  
+  test "password should be present" do 
+    @member.password = @member.password_confirmation = " "
+    assert_not @member.valid?
+  end
+  
+  test "password should be atleast 5 characters" do
+    @member.password = @member.password_confirmation = "x" * 4
+    assert_not @member.valid?
+  end
+  
   
 end
