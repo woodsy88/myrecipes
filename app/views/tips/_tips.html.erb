@@ -1,0 +1,24 @@
+<% obj.each do |tip|  %>
+
+<div class="row well">
+  
+  
+  <div class="col-sm-2 center">
+    <section class="chef-info center">
+     
+      <%= gravatar_for(tip.member, size: 50)  %>
+      <p><%= tip.member.membername  %></p>
+    </section>
+  </div>
+  <div class="col-sm-8">
+     <h4 class="tip-name"><%= link_to tip.name, tip_path(tip) %></h4>
+  <p class="tip-description"><%= truncate( tip.description, length: 150) %></p>
+  <p>
+  <span class="quiet"><small class="tip-date text-muted">Added <%= time_ago_in_words(tip.created_at)  %> ago</small></span>
+   </p>
+  </div>
+  </div>
+
+
+ 
+<% end %>
