@@ -10,12 +10,12 @@ class MembersSignupTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
   
-  test "reject an invalid signup" do
+  test "get a succesful signup" do
     get signup_path
     assert_response :success
   end
   
-  test "except valid signup" do
+  test "reject an invalid signup" do
     get signup_path
     assert_no_difference "Member.count" do
       post members_path, params: { member: {membername: " ", email: " ", password: "password",

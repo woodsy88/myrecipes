@@ -2,7 +2,7 @@ class TipsController < ApplicationController
   before_action :set_tip, only: [:show, :edit, :update]
   
   def index
-    @tips = Tip.all
+    @tips = Tip.paginate(page: params[:page], per_page: 5)
   end
   
   def show

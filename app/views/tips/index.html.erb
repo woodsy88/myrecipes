@@ -3,6 +3,11 @@
 <h2 align="center"><%= render 'shared/page_title', title: "Showing All Hockey Tips" %></h2>
 <hr />
 
+<div align="center">
+<%= will_paginate %>
+</div>
 <%= render 'tips', obj: @tips %>
-
+<div align="center">
+<%= will_paginate %>
+</div>
 </div>
