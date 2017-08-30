@@ -15,5 +15,10 @@ Rails.application.routes.draw do
     
     get '/signup', to: 'members#new'
     resources :members, except: [:new]
+    
+    #Login / Lgout routes
+    get '/login', to: 'sessions#new'
+    post '/login', to: 'sessions#create'
+    delete '/logout', to: 'sessions#destroy'
   
 end

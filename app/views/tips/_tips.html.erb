@@ -16,6 +16,12 @@
   <p>
   <span class="quiet"><small class="tip-date text-muted">Added <%= time_ago_in_words(tip.created_at)  %> ago</small></span>
    </p>
+   <% if logged_in? && (current_member == tip.member || current_member.admin?)  %>
+       <div class="recipe-actions">
+        <%= link_to "Edit this tip", edit_tip_path(tip), class: "btn btn-xs btn-primary" %>
+        <%= link_to "Delete this tip", tip_path(tip), method: :delete, data: {confirm: "Are your sure you want to delete this tip"}, class: "btn btn-xs btn-danger"  %>
+       </div>
+   <% end %>
   </div>
   </div>
 

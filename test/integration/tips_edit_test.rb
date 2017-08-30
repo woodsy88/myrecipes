@@ -9,6 +9,7 @@ class TipsEditTest < ActionDispatch::IntegrationTest
   end
 
   test "reject invalid tip update" do
+    sign_in_as(@member, "password")
     get edit_tip_path(@tip)
     assert_template 'tips/edit'
     patch tip_path(@tip), params: {tip: {name: " ", description: "some description"}}
@@ -18,6 +19,7 @@ class TipsEditTest < ActionDispatch::IntegrationTest
   end
   
   test "successfully edit a tip" do
+    sign_in_as(@member, "password")
     get edit_tip_path(@tip)
     assert_template 'tips/edit'
     updated_name = "updated tips name"

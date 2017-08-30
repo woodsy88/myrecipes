@@ -8,6 +8,10 @@
         <li><%= link_to gravatar_for(member), member_path(member) %></li>
         <li class="member-title"><%= link_to member.membername, member_path(member) %></li>
         <li><small><%= pluralize(member.tips.count, "hockey tip") if member.tips  %></small></li>
+        <% if logged_in? && current_member.admin? && !member.admin? %>
+        <li><%= link_to "Delete this member", member_path(member), method: :delete,
+                                              data: {confirm: "Are you sure you want to delete the chef and all associated recipes"} %></li>
+        <% end %>
       </div>
     </ul>
   <% end %>

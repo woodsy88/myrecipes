@@ -25,6 +25,7 @@ class TipsTest < ActionDispatch::IntegrationTest
   end
   
   test "should get tips show" do
+    sign_in_as(@member, "password")
     get tip_path(@tip)
     assert_template 'tips/show'
     assert_match @tip.name, response.body
@@ -37,6 +38,7 @@ class TipsTest < ActionDispatch::IntegrationTest
   end
   
   test "create new valid tip" do
+    sign_in_as(@member, "password" )
     get new_tip_path
     assert_template 'tips/new'
     name_of_tip = "skating"
@@ -52,6 +54,7 @@ class TipsTest < ActionDispatch::IntegrationTest
   end
   
   test "reject invalid tip submissions" do
+   sign_in_as(@member, "password")
    get new_tip_path
    assert_template 'tips/new'
    assert_no_difference 'Tip.count' do

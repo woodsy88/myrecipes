@@ -10,6 +10,7 @@ class TipsDeleteTest < ActionDispatch::IntegrationTest
   
   
   test "succesffuly delete a tip" do
+    sign_in_as(@member, "password")
     get tip_path(@tip)
     assert_template 'tips/show'
     assert_select 'a[href=?]', tip_path(@tip), text: "Delete this tip"

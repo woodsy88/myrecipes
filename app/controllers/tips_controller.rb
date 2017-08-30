@@ -1,5 +1,9 @@
 class TipsController < ApplicationController
-  before_action :set_tip, only: [:show, :edit, :update]
+  before_action :set_tip, only: [:show, :edit, :update, :destroy]
+  
+  before_action :require_user, only: [:new, :edit, :update, :destroy]
+  
+  before_action :require_same_user, only: [:edit, :update, :destroy]
   
   def index
     @tips = Tip.paginate(page: params[:page], per_page: 5)
@@ -15,7 +19,7 @@ class TipsController < ApplicationController
   
   def create
     @tip = Tip.new(tip_params)
-    @tip.member = Member.first
+    @tip.member = current_member
     
     if @tip.save
       flash[:success] = "Tip was created Succesffuly"
@@ -54,6 +58,13 @@ class TipsController < ApplicationController
   
   def tip_params
     params.require(:tip).permit(:name, :description)
+  end
+  
+  def require_same_user
+    if current_member != @tip.member and !current_member.admin?
+      flash[:danger] = "You can only edit or delete your own tips"
+      redirect_to tips_path 
+    end
   end
   
 end
