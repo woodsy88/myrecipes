@@ -11,4 +11,6 @@ class Member < ApplicationRecord
     has_many :tips, dependent: :destroy
     has_secure_password
     validates :password, presence: true, length: { minimum: 5 }, allow_nil: true
+    #if a member is deleted, so are their comments
+    has_many :comments, dependent: :destroy
 end
