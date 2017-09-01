@@ -7,4 +7,7 @@ class Tip < ApplicationRecord
   
   #part of paginate
   default_scope -> { order(updated_at: :desc) }
+  
+  has_many :tip_skills
+  has_many :skills, through: :tip_skills
 end
