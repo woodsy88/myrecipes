@@ -13,8 +13,17 @@
   <div class="col-sm-8">
      <h4 class="tip-name"><%= link_to tip.name, tip_path(tip) %></h4>
   <p class="tip-description"><%= truncate( tip.description, length: 150) %></p>
+ 
+ <!-- rendering the  _skill.html.erb partial -->
+ 
+  <% if tip.skills.any? %>
+  <p>Skills: <%= render tip.skills %></p>
+<% end %>
+
+
   <p>
-  <span class="quiet"><small class="tip-date text-muted">Added <%= time_ago_in_words(tip.created_at)  %> ago</small></span>
+  <span class="quiet"><small class="tip-date text-muted">Added <%= time_ago_in_words(tip.created_at)  %> ago by <%= tip.member.membername.capitalize %>
+                                                                                            | <%= pluralize(tip.comments.count, 'Comment') %></small></span>
    </p>
    <% if logged_in? && (current_member == tip.member || current_member.admin?)  %>
        <div class="recipe-actions">

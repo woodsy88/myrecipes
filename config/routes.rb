@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   get 'pages/home', to: 'pages#home'
   get 'pages/about', to: 'pages#about'
   
-  resources :tips
+  resources :tips do
+    resources :comments, only: [:create]
+  end
     #get '/tips', to: 'tips#index'
     #get '/tips/new', to: 'tips#new', as:'new_tip'
     #get '/tips/:id', to: 'tips#show', as: 'tip'
@@ -20,5 +22,9 @@ Rails.application.routes.draw do
     get '/login', to: 'sessions#new'
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
+    
+    resources :skills, except: [:delete]
+    
+    
   
 end

@@ -1,0 +1,19 @@
+<%= render 'shared/page_title', title: "#{@skill.name}" %>
+
+
+<div class="container">
+
+<% if @skill.tips.count != 0 %>
+  <h4 align="center">Tip's containing <%= @skill.name %></h4>
+  <div align="center">
+    <%= will_paginate @skill_tips %>
+  </div>
+  <%= render 'tips/tips', obj: @skill_tips %>
+  <div align="center">
+    <%= will_paginate @skill_tips %>
+  </div>
+<% else %>
+  <h4 align="center">No recipes yet!</h4>
+<% end %>
+
+  </div>

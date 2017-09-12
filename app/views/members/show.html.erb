@@ -7,7 +7,7 @@
     <%= gravatar_for @member, size: 130 %>
   </div>
 </div>
-
+<% if @member.tips.count != 0 %>
   <h4 align="center"><%= @member.membername %>'s tips</h4>
   <div align="center">
     <%= will_paginate @member_tips %>
@@ -16,5 +16,10 @@
   <div align="center">
     <%= will_paginate @member_tips %>
   </div>
+  
+  <% else %>
+  <h4 align="center">no recipes yet</h4>
+  
+  <% end %>
   
   </div>

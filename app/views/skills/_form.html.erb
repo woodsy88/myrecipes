@@ -1,0 +1,35 @@
+<div class="container">
+  
+ 
+  <%= render 'shared/errors', obj: @skill %>
+
+  <div class="row">
+  <div class="col-md-12">
+  <%= form_for(@skill, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+
+  <div class="form-group">
+    <div class="control-label col-md-2">
+      <%= f.label :name  %>
+    </div>
+    <div class="col-md-8">
+      <%= f.text_field :name, class: "form-control", placeholder: "Enter Skill", autofocus: true %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+      <%= f.submit(@skill.new_record? ? "Add Skill" : "Update Skill",
+                          class: "btn btn-primary btn-lg btn-xlarge") %>
+    </div>
+  </div>
+  <% end %>
+  <div class="col-md-4 col-md-offset-4">
+    <%= link_to "Return To Tips", tips_path %>
+  </div>
+  
+  
+  </div>
+</div>
+  
+
+  
+</div>

@@ -1,34 +1,80 @@
 <%= render 'shared/page_title', title: @tip.name %>
 
 <div class="container">
-<div class="well col-md-8 md-offset-2">
-<h2 class="tip-name"><%= @tip.name %></h2>
-
-<p class="center tip-description"><%= simple_format(@tip.description) %></p>
-<div class="pull-right">
-    <p class="text-muted center">Created By:</p>
+  <div class="well col-md-8 md-offset-2">
+    <h2 class="tip-name"><%= @tip.name %></h2>
+    <p class="center tip-description"><%= simple_format(@tip.description) %></p>
+     
+    <% if @tip.skills.any? %>
+      <p>Skills: <%= render @tip.skills %></p>
+    <% end %>
     
-    <p class="center">
-      <%= link_to gravatar_for(@tip.member), tips_path %>
-    </p>
-    
-    <p class="center">
-      <small><%= @tip.member.membername  %></small>
-      <div class="pull-right text-muted"><%= time_ago_in_words(@tip.created_at) %> ago</div>
-    </p>
-    
-   
+  <div class="pull-right">
+      <p class="text-muted center">Created By:</p>
+      <p class="center"><%= link_to gravatar_for(@tip.member), member_path(@tip.member) %></p>
+      <p class="center">
+        <small><%= @tip.member.membername  %></small>
+        <div class="pull-right text-muted"><%= time_ago_in_words(@tip.created_at) %> ago by <%= @tip.member.membername.capitalize  %></div>
+      </p>
+  </div>
+  
+  <div class="recipe-actions">
+    <% if logged_in? && (current_member == @tip.member || current_member.admin?) %>
+          <%= link_to "Edit this tip", edit_tip_path(@tip), class: "btn btn-xs btn-primary" %>
+          <%= link_to "Delete this tip", tip_path(@tip), method: :delete, data: {confirm: "Are your sure you want to delete this tip"}, class: "btn btn-xs btn-danger"  %>
+    <% end %>
+    <%= link_to "Return to tips listing", tips_path, class: "btn btn-xs btn-success" %>
+  </div>
+  </div>
 </div>
+<!--ADDING COMMENTS FORM  -->
+<% if logged_in?  %>
+    <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <hr />
+          <%= form_for([@tip, @comment], :html => {class: "form-horizontal", role: "form"}) do |f| %>
+        
+          
+          <div class="form-group">
+            <div class="control-label col-md-2">
+              <%= f.label :description, "Comment" %>
+            </div>
+            <div class="col-md-8">
+              <%= f.text_area :description, rows: 8, class: "form-control", placeholder: "Enter Comment Here" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+              <%= f.submit "Submit Comment", class: "btn btn-primary btn-lg btn-main" %>
+            </div>
+          </div>
+          <% end %>
+         <hr />
+          </div>
+        </div>
 
-<div class="recipe-actions">
-  <% if logged_in? && (current_member == @tip.member || current_member.admin?) %>
-        <%= link_to "Edit this tip", edit_tip_path(@tip), class: "btn btn-xs btn-primary" %>
-        <%= link_to "Delete this tip", tip_path(@tip), method: :delete, data: {confirm: "Are your sure you want to delete this tip"}, class: "btn btn-xs btn-danger"  %>
+<% end %>
+
+
+<!--SHOWING COMMENTS -->
+<div class="container">
+  <% if @tip.comments != 0 %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h3>Comments:</h3>
+      <div id="messages">
+        <%= render partial: 'comments/comments', object: @comments %>
+      </div>
+    </div>
+  </div>
+    
+    <% else %>
+  
+  
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h3>No comments yet</h3>
+      </div>
+    </div>
   <% end %>
-  
-  
-  <%= link_to "Return to tips listing", tips_path, class: "btn btn-xs btn-success" %>
-</div>
-</div>
-
 </div>

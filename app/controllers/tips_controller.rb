@@ -11,6 +11,8 @@ class TipsController < ApplicationController
   
   def show
    #@tip = Tip.find(params[:id])
+   @comment = Comment.new
+   @comments = @tip.comments.paginate(page: params[:page], per_page: 5)
   end
   
   def new 
@@ -57,7 +59,7 @@ class TipsController < ApplicationController
   end
   
   def tip_params
-    params.require(:tip).permit(:name, :description)
+    params.require(:tip).permit(:name, :description, skill_ids: [])
   end
   
   def require_same_user
