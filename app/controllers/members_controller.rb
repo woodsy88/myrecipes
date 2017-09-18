@@ -19,6 +19,7 @@ class MembersController < ApplicationController
    @member = Member.new(member_params)
    if @member.save
      session[:member_id] = @member.id
+        cookies.signed[:member_id] = @member.id
      #handle it
      flash[:success] = "Welcome #{@member.membername} to RinkTrader"
      redirect_to member_path(@member)

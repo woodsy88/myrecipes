@@ -7,8 +7,10 @@ class CommentsController < ApplicationController
       @comment.member = current_member
       
       if @comment.save
-        flash[:success] = "Comment was saved succesfully"
-        redirect_to tip_path(@tip)
+        #broadcast from action cable
+        ActionCable.server.broadcast "comments", render(partial: 'comments/comment', object: @comment)
+        #flash[:success] = "Comment was saved succesfully"
+        #redirect_to tip_path(@tip)
       else
         flash[:danger] = "Comment was not created"
         redirect_to :back

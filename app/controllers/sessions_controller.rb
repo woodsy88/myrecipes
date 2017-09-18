@@ -8,7 +8,9 @@ class SessionsController < ApplicationController
     #find the member
     member = Member.find_by(email: params[:session][:email].downcase)
     if member && member.authenticate(params[:session][:password])
-      session[:member_id] = member.id     
+      session[:member_id] = member.id   
+      #saving encrypted cookies into member for action cable
+      cookies.signed[:member_id] = member.id
       flash[:success] = "You have succesfully logged in"
       redirect_to member
     else

@@ -25,6 +25,6 @@ Rails.application.routes.draw do
     
     resources :skills, except: [:delete]
     
-    
+    mount ActionCable.server => '/cable'
   
 end
