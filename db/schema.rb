@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901152402) do
+ActiveRecord::Schema.define(version: 20170918165314) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "description"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 20170901152402) do
     t.datetime "updated_at",                      null: false
     t.string   "password_digest"
     t.boolean  "admin",           default: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "skills", force: :cascade do |t|

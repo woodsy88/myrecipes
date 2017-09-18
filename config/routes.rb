@@ -26,5 +26,7 @@ Rails.application.routes.draw do
     resources :skills, except: [:delete]
     
     mount ActionCable.server => '/cable'
+    
+    get '/chat', to: 'chatrooms#show'
   
 end
