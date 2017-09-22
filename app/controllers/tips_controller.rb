@@ -1,9 +1,13 @@
 class TipsController < ApplicationController
-  before_action :set_tip, only: [:show, :edit, :update, :destroy]
+  before_action :set_tip, only: [:show, :edit, :update, :destroy, :like]
   
-  before_action :require_user, only: [:new, :edit, :update, :destroy]
+  before_action :require_user, only: [:new, :edit, :update, :destroy, :like]
   
   before_action :require_same_user, only: [:edit, :update, :destroy]
+  
+  before_action :require_user_like, only: [:like]
+  
+ 
   
   def index
     @tips = Tip.paginate(page: params[:page], per_page: 5)
@@ -52,6 +56,18 @@ class TipsController < ApplicationController
     redirect_to tips_path
   end
   
+  def like
+    like = Like.create(like: params[:like], member: current_member, tip: @tip)
+    if like.valid?
+      flash[:success] = "Your selection was succesful"
+      redirect_to :back
+    else
+      flash[:danger] = "You can only like/dislike a tip once"
+      redirect_to :back
+    end
+    
+  end
+  
   private 
   
   def set_tip
@@ -66,6 +82,13 @@ class TipsController < ApplicationController
     if current_member != @tip.member and !current_member.admin?
       flash[:danger] = "You can only edit or delete your own tips"
       redirect_to tips_path 
+    end
+  end
+  
+  def require_user_like
+    if !logged_in?
+      flash[:danger] = "You must be logged in to perform that action"
+      redirect_to :back
     end
   end
   

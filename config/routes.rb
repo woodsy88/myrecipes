@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   
   resources :tips do
     resources :comments, only: [:create]
+    member do 
+    post 'like'
+  end
   end
     #get '/tips', to: 'tips#index'
     #get '/tips/new', to: 'tips#new', as:'new_tip'

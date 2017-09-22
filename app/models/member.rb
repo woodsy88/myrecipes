@@ -14,4 +14,6 @@ class Member < ApplicationRecord
     #if a member is deleted, so are their comments
     has_many :comments, dependent: :destroy
     has_many :messages, dependent: :destroy
+    
+    has_many :likes, dependent: :destroy
 end

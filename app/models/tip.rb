@@ -12,4 +12,15 @@ class Tip < ApplicationRecord
   has_many :skills, through: :tip_skills
   # if a tip is deleted, the comments associated with that tip are deleted 
   has_many :comments, dependent: :destroy
+  
+  has_many :likes, dependent: :destroy
+  
+  def thumbs_up_total
+    self.likes.where(like: true).size
+  end
+  
+  def thumbs_down_total
+    self.likes.where(like: false).size
+  end
+  
 end
