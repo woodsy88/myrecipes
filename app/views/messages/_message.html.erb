@@ -1,0 +1,17 @@
+<div class="container">
+
+<div class="message">
+  <p>
+    <%= gravatar_for(message.member, size: 50) %>
+    <strong>
+      <%= message.member.membername.capitalize %>: </strong>
+      <span class="content">
+        <%= message.content %>
+      </span>
+         <br>
+      <small><em>Sent <%= time_ago_in_words(message.created_at)  %></em></small>
+   
+  </p>
+</div>
+
+</div>

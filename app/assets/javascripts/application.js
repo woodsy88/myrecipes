@@ -15,3 +15,35 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
+
+
+
+function scrollToBottom(){
+  if($('#messages').length > 0) {
+    $('#messages').scrollTop($('#messages')[0].scrollHeight);
+  }
+};
+
+function submitMessage(){
+  event.preventDefault();
+  $('#new_message').submit();
+};
+
+//submits message when you press enter
+$(document).on('keypress', '[data-behavior~=room_speaker]', function(event){
+  if (event.keyCode == 13) {
+    submitMessage(event);
+  };
+});
+
+//submits message when you click the button
+$(document).on('click', '[data-send~=message]', function(event){
+  submitMessage(event);
+} );
+
+$(document).ready(function() {
+  $('#new_message').on("ajax:complete", function(e, data, status){
+    $('#message_content').val('');
+  })
+  scrollToBottom();
+});

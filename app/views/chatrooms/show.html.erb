@@ -3,10 +3,21 @@
 <div class="row chat-container">
   <div class="col-md-8 center-block">
     <div class="messages" id="messages">
-      
+      <!-- this will use the messages partial view, and the @messages from the chatroom controller -->
+      <%= render @messages %>
     </div>
-  </div>
+  <hr />
   <div class="message-container">
+    <%= form_for(@message, remote: true, :html => {class: "form-horizontal", role: "form"}) do |f| %>
     
+    
+     <%= f.text_area :content, class: "form-control", data: { behavior: 'room_speaker'},
+                                placeholder: "Enter Message" %>
+    
+    <%= f.submit "Send", class: 'btn btn-primary', data: { send: "message" } %>
+    
+      
+    <% end %>
+    </div>
   </div>
 </div>
