@@ -75,7 +75,7 @@ class TipsController < ApplicationController
   end
   
   def tip_params
-    params.require(:tip).permit(:name, :description, skill_ids: [])
+    params.require(:tip).permit(:name, :description, :image, skills_ids: [])
   end
   
   def require_same_user

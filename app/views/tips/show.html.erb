@@ -2,6 +2,12 @@
 
 <div class="container">
   <div class="well col-md-8 md-offset-2">
+  
+  <div align="center">
+    <%= image_tag @tip.image.url if @tip.image? %>
+  </div>
+
+
     <h2 class="tip-name"><%= @tip.name %></h2>
     <p class="center tip-description"><%= simple_format(@tip.description) %></p>
      
@@ -25,7 +31,9 @@
     <% end %>
     <%= link_to "Return to tips listing", tips_path, class: "btn btn-xs btn-success" %>
   </div>
-  <!-- LIKES SECTION -->
+  
+  
+      <!-- LIKES SECTION -->
 <div class="row liking">
   <div class="row col-md-8 col-md-offset-2">
     <%= link_to like_tip_path(@tip, like: true), method: :post do %>
@@ -36,7 +44,10 @@
     <% end %> <%= @tip.thumbs_down_total %>
   </div>
 </div>
+
   </div>
+  
+
 </div>
 
 <!--ADDING COMMENTS FORM  -->
